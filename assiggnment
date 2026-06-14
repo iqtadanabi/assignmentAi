@@ -1,0 +1,48 @@
+{
+  "system_name": "Smart Traffic Signal Controller",
+  "peas": {
+    "performance_measures": [
+      "average_vehicle_wait_time",
+      "throughput_rate_per_hour",
+      "emergency_vehicle_priority_success_rate",
+      "emissions_and_fuel_idle_reduction"
+    ],
+    "environment": "Dynamic urban intersection networks with variable traffic, pedestrian behaviors, and weather conditions.",
+    "actuators": [
+      "physical_signal_heads",
+      "digital_broadcast_transmitters"
+    ],
+    "sensors": [
+      "high_resolution_optical_cameras_and_thermal_imagers",
+      "inductive_loop_detectors",
+      "v2x_communication_receivers"
+    ]
+  },
+  "environment_classification": {
+    "observability": {
+      "choice": "Partially Observable",
+      "justification": "The controller cannot see around physical blockages or predict driver intentions, relying only on localized sensor data."
+    },
+    "agents": {
+      "choice": "Multi-agent",
+      "justification": "The system interacts with human drivers, pedestrians, and neighboring traffic signals that influence traffic flow."
+    },
+    "determinism": {
+      "choice": "Stochastic",
+      "justification": "Traffic arrivals, pedestrian crossings, and vehicle breakdowns are random and cannot be predicted with certainty."
+    },
+    "episodicity": {
+      "choice": "Sequential",
+      "justification": "A decision to extend a green light now directly creates or alleviates congestion at a later point in time."
+    },
+    " dynamism": {
+      "choice": "Dynamic",
+      "justification": "The traffic state continuously changes while the controller is computing its next signaling phase."
+    },
+    "continuity": {
+      "choice": "Continuous",
+      "justification": "Time, vehicle speeds, and physical positions of road objects exist on an infinite, continuous spectrum."
+    }
+  },
+  "utility_function": "U = w1 * throughput - w2 * max_individual_wait_time"
+}
